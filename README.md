@@ -16,9 +16,7 @@ Provides a simple section displaying testimonials.
 
 * SilverStripe ^4.0
 * Silverstripe elemental ^4
-* buckleshusky/fontawesomeiconpicker ^1
 * [Bootstrap](https://getbootstrap.com) on the Frontend
-* [Fontawesome](https://fontawesome.com) on the Frontend (if enabled)
 
 ## Installation
 
