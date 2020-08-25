@@ -22,7 +22,7 @@ use Syntro\SilverStripeElementalBootstrapTestimonialSection\Model\Testimonial;
 class TestimonialSection extends BootstrapSectionBaseElement
 {
 
-    private static $icon = 'font-icon-circle-star';
+    private static $icon = 'elemental-icon-testimonial';
     /**
      * This defines the block name in the CSS
      *
