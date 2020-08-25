@@ -13,13 +13,13 @@
                 <div class="px-5">
                     <img src="$Image.URL" alt="$Title" class="w-50 img-fluid rounded-circle shadow">
                 </div>
-            <p class="mt-4 px-3"><i>"$Quote"</i></p>
                 <% if ShowTitle %>
-                    <h4 class="mt-4">$Title</h4>
+                    <h3 class="mt-4">$Title</h3>
                 <% end_if %>
                 <% if SubTitle %>
-                    <h6><strong>$SubTitle</strong></h6>
+                <lead><strong>$SubTitle</strong></lead>
                 <% end_if %>
+                <p class="mt-4 px-3"><i>"$Quote"</i></p>
             </div>
         <% end_loop %>
     </div>
