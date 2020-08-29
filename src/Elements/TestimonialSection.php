@@ -13,7 +13,6 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Syntro\SilverStripeElementalBaseitems\Elements\BootstrapSectionBaseElement;
 use Syntro\SilverStripeElementalBootstrapTestimonialSection\Model\Testimonial;
 
-
 /**
  *  Bootstrap based Testimonial section
  *
@@ -36,9 +35,7 @@ class TestimonialSection extends BootstrapSectionBaseElement
      */
     private static $inline_editable = false;
 
-    private static $styles = [
-        'default' => 'Default style',
-    ];
+    private static $styles = [];
 
     /**
      * @var string
@@ -50,43 +47,7 @@ class TestimonialSection extends BootstrapSectionBaseElement
      */
     private static $table_name = 'ElementTestimonialSection';
 
-    /**
-     * set to false if image option should not show up
-     *
-     * @config
-     * @var bool
-     */
-    private static $allow_image_background = true;
 
-    /**
-     * Available background colors for this Element
-     *
-     * @config
-     * @var array
-     */
-    private static $background_colors = [
-        'default' => 'Default',
-        'light' => 'Lightgrey',
-        'dark' => 'Dark',
-    ];
-
-    private static $text_colors = [
-        'default' => 'Default',
-        'white' => 'White'
-    ];
-
-    /**
-     * Color mapping from background color. This is mainly intended
-     * to set a default color on the section-level, ensuring text is readable.
-     * Colors of subelementscan be added via templates
-     *
-     * @config
-     * @var array
-     */
-    private static $text_colors_by_background = [
-        'light' => 'default',
-        'dark' => 'light',
-    ];
 
     private static $db = [
         'Content' => 'Text',
@@ -104,11 +65,27 @@ class TestimonialSection extends BootstrapSectionBaseElement
     ];
 
     /**
+     * fieldLabels - apply labels
+     *
+     * @param  boolean $includerelations = true
+     * @return array
+     */
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels($includerelations);
+        $labels['Testimonials'] = _t(__CLASS__ . '.TESTIMONIALS', 'Testimonials');
+        $labels['Content'] = _t(__CLASS__ . '.CONTENT', 'Content');
+        return $labels;
+    }
+
+    /**
      * @return FieldList
      */
     public function getCMSFields()
     {
         $this->beforeUpdateCMSFields(function ($fields) {
+
+            $fields->dataFieldByName('Content')->setTitle($this->fieldLabel('Content'));
 
             if ($this->ID) {
                 /** @var GridField $testimonials */
@@ -124,7 +101,6 @@ class TestimonialSection extends BootstrapSectionBaseElement
 
                 $fields->addFieldToTab('Root.Main', $testimonials);
             }
-
         });
 
         return parent::getCMSFields();
@@ -135,7 +111,15 @@ class TestimonialSection extends BootstrapSectionBaseElement
      */
     public function getSummary()
     {
-        return DBField::create_field('HTMLText', $this->Content)->Summary(20);
+        return sprintf(
+            '%s %s',
+            _t(
+                __CLASS__ . '.SUMMARY',
+                'one testimonial from|{count} testimonials from',
+                ['count' => $this->Testimonials()->count()]
+            ),
+            implode(', ', $this->Testimonials()->map('Title')->keys())
+        );
     }
 
     /**
@@ -148,6 +132,11 @@ class TestimonialSection extends BootstrapSectionBaseElement
         return $blockSchema;
     }
 
+    /**
+     * getType
+     *
+     * @return string
+     */
     public function getType()
     {
         return _t(__CLASS__ . '.BlockType', 'Testimonial Section');

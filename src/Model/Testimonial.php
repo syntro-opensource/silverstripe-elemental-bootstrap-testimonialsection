@@ -1,8 +1,10 @@
 <?php
+
 namespace Syntro\SilverStripeElementalBootstrapTestimonialSection\Model;
 
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use Syntro\SilverStripeElementalBaseitems\Model\BaseItem;
 use Syntro\SilverStripeElementalBootstrapTestimonialSection\Elements\TestimonialSection;
@@ -47,6 +49,28 @@ class Testimonial extends BaseItem
         'Image'
     ];
 
+    private static $summary_fields = [
+        'Image.StripThumbnail',
+        'Title'
+    ];
+
+    /**
+     * fieldLabels - apply labels
+     *
+     * @param  boolean $includerelations = true
+     * @return array
+     */
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels($includerelations);
+        $labels['Image.StripThumbnail'] = _t(__CLASS__ . '.IMAGE', 'Image');
+        $labels['Image'] = _t(__CLASS__ . '.IMAGE', 'Image');
+        $labels['Title'] = _t(__CLASS__ . '.NAME', 'Name');
+        $labels['SubTitle'] = _t(__CLASS__ . '.SUBTITLE', 'Job description');
+        $labels['Quote'] = _t(__CLASS__ . '.QUOTE', 'Quote');
+        return $labels;
+    }
+
     /**
      * @return FieldList
      */
@@ -64,35 +88,13 @@ class Testimonial extends BaseItem
                 'Root.Main',
                 $imageField = UploadField::create(
                     'Image',
-                    'Image'
-                )
+                    $this->fieldLabel('Image')
+                ),
+                'SubTitle'
             );
             $imageField->setFolderName('Uploads/Testimonials');
-
-            // Add content field
-            // $fields->addFieldToTab(
-            //     'Root.Main',
-            //     TextareaField::create(
-            //         'Content',
-            //         'Content'
-            //     ),
-            //     'CTALink'
-            // );
         });
 
         return parent::getCMSFields();
-    }
-
-    /**
-     * @param bool $includerelations
-     * @return array
-     */
-    public function fieldLabels($includerelations = true)
-    {
-        $labels = parent::fieldLabels($includerelations);
-
-        $labels['Title'] = _t(__CLASS__ . '.TitleLabel', 'Name');
-
-        return $labels;
     }
 }

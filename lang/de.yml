@@ -1,3 +1,13 @@
 de:
-  Syntro\SilverStripeElementalBootstrapAlertSection\Elements\AlertSection:
-    BlockType: Warnung
+  Syntro\SilverStripeElementalBootstrapTestimonialSection\Elements\TestimonialSection:
+    BlockType: Kundenmeinungen
+    TESTIMONIALS: Rezensionen
+    Content: Inhalt
+    SUMMARY:
+      one: 'Eine Rezension von'
+      other: '{count} Rezensionen von'
+  Syntro\SilverStripeElementalBootstrapTestimonialSection\Model\Testimonial:
+    IMAGE: Bild
+    NAME: Name
+    SUBTITLE: Berufsbezeichnung
+    QUOTE: Zitat
