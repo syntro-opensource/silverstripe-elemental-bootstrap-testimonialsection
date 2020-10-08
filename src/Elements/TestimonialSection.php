@@ -10,7 +10,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
-use Syntro\SilverStripeElementalBaseitems\Elements\BootstrapSectionBaseElement;
+use DNADesign\Elemental\Models\BaseElement;
 use Syntro\SilverStripeElementalBootstrapTestimonialSection\Model\Testimonial;
 
 /**
@@ -18,7 +18,7 @@ use Syntro\SilverStripeElementalBootstrapTestimonialSection\Model\Testimonial;
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class TestimonialSection extends BootstrapSectionBaseElement
+class TestimonialSection extends BaseElement
 {
 
     private static $icon = 'elemental-icon-testimonial';
