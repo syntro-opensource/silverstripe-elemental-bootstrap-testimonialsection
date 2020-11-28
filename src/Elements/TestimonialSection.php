@@ -57,12 +57,6 @@ class TestimonialSection extends BaseElement
         'Testimonials' => Testimonial::class
     ];
 
-    /**
-     * @var array
-     */
-    private static $owns = [
-        'Testimonials'
-    ];
 
     /**
      * fieldLabels - apply labels
